@@ -1,10 +1,11 @@
-<script setup>
-import { formatDateAndTime } from 'libs/shared/helpers/datetimeconverter.helper.ts';
-import { timeAgo } from 'libs/shared/helpers/timeago.helper.ts';
-import { onBeforeMount, ref } from 'vue';
+<script setup lang="ts">
+import { formatDateAndTime } from '@shared/helpers/datetimeconverter.helper';
+import { timeAgo } from '@shared/helpers/timeago.helper';
+import { onBeforeMount, ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { userSettingsService } from '../../../../libs/shared/services';
-import { ticketsService, translationsService, usersService } from '../services';
+import { userSettingsService } from '@shared/services';
+import { ticketsService, translationsService, usersService } from '@/services';
+import type { TicketDetails } from '@/models/tickets.model';
 
 const router = useRouter();
 const tickets = ref();
@@ -26,13 +27,59 @@ const ticketAssignee = ref('');
 const getTickets = async () => {
   await ticketsService.fetchTickets().then((response) => {
     tickets.value = Object.values(response.tickets).map((ticket) => {
-      ticket.category = tr.value.tickets.category[ticket.category].da;
-      ticket.creator = users.value.find((user) => user.id === ticket.creator).name;
-      ticket.assignee = users.value.find((user) => user.id === ticket.assignee).name;
+      let categoryIndex, creatorId, assigneeId, statusIndex;
+      
+      if (typeof ticket.category === 'number') {
+        categoryIndex = ticket.category;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.category (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.category,
+          'Falling back to 0.'
+        );
+        categoryIndex = 0;
+      }
+      
+      if (typeof ticket.creator === 'number') {
+        creatorId = ticket.creator;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.creator (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.creator,
+          'Falling back to 0.'
+        );
+        creatorId = 0;
+      }
+      
+      if (typeof ticket.assignee === 'number') {
+        assigneeId = ticket.assignee;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.assignee (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.assignee,
+          'Falling back to 0.'
+        );
+        assigneeId = 0;
+      }
+      
+      if (typeof ticket.status === 'number') {
+        statusIndex = ticket.status;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.status (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.status,
+          'Falling back to 0.'
+        );
+        statusIndex = 0;
+      }
+      
+      ticket.category = tr.value.tickets.category[categoryIndex].da;
+      ticket.creator = users.value.find((user) => user.id === creatorId)?.name || '';
+      ticket.assignee = users.value.find((user) => user.id === assigneeId)?.name || '';
       ticket.status =
         ticket.open === 1
-          ? tr.value.tickets.status.open[ticket.status].da
-          : tr.value.tickets.status.closed[ticket.status].da;
+          ? tr.value.tickets.status.open[statusIndex].da
+          : tr.value.tickets.status.closed[statusIndex].da;
       return ticket;
     });
     filterTickets();

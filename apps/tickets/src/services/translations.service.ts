@@ -4,13 +4,13 @@ let translations: { [key: string]: unknown };
 
 export interface TranslationResponse {
   status: 'success' | 'error';
-  translations;
+  translations: { [key: string]: unknown };
 }
 
 export const translationsService = {
   populateTranslations: async () =>
-    await get('/translations/ajax/tickets.*?lang=da').then((resp) => {
-      translations = resp?.translations;
+    await get<TranslationResponse>('/translations/ajax/tickets.*?lang=da').then((resp) => {
+      translations = resp.translations;
     }),
 
   getTranslations: async () => {

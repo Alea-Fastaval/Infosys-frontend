@@ -1,6 +1,6 @@
 import TimeAgo from 'javascript-time-ago';
 
-export const timeAgo = (input) => {
+export const timeAgo = (input: number | null | undefined): string => {
   const timeAgo = new TimeAgo('da-DK');
   if (!input) return '';
 

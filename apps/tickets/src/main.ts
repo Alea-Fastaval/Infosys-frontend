@@ -4,6 +4,7 @@ import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Column from 'primevue/column';
 import PrimeVue from 'primevue/config';
+import Aura from '@primevue/themes/aura';
 import DataTable from 'primevue/datatable';
 import Dialog from 'primevue/dialog';
 import Dropdown from 'primevue/dropdown';
@@ -53,7 +54,15 @@ app.component('Toolbar', Toolbar);
 app.directive('tooltip', Tooltip);
 
 app.use(router);
-app.use(PrimeVue, { ripple: true });
+app.use(PrimeVue, { 
+  ripple: true,
+  theme: {
+    preset: Aura,
+    options: {
+      darkModeSelector: false
+    }
+  }
+});
 
 TimeAgo.addDefaultLocale(da);
 
