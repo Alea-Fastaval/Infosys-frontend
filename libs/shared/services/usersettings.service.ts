@@ -3,14 +3,23 @@ export const userSettingsService = {
     return localStorage.getItem(key);
   },
   getBoolean: (key: string): boolean | null => {
-    if (!localStorage.getItem(key)) return null;
-    return localStorage.getItem(key) === 'true';
+    const value = localStorage.getItem(key);
+    if (value === null) return null;
+    return value === 'true';
   },
   getNumber: (key: string): number | null => {
-    if (!localStorage.getItem(key)) return null;
-    return Number(localStorage.getItem(key));
+    const value = localStorage.getItem(key);
+    if (value === null) return null;
+    const num = Number(value);
+    return isNaN(num) ? null : num;
   },
-  set: (key: string, value: string): void => {
-    localStorage.setItem(key, value);
+  set: (key: string, value: string | number | boolean): void => {
+    localStorage.setItem(key, String(value));
+  },
+  remove: (key: string): void => {
+    localStorage.removeItem(key);
+  },
+  clear: (): void => {
+    localStorage.clear();
   }
 };

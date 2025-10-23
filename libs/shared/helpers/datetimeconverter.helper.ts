@@ -3,7 +3,7 @@
  * @param date A number in seconds, not millisenconds
  * @returns date and time formatted as dd/mm/yyyy hh:mm:ss
  */
-export const formatDateAndTime = (date) => {
+export const formatDateAndTime = (date: number | null | undefined): string => {
   if (!date) return '';
 
   return new Intl.DateTimeFormat('en-GB', { dateStyle: 'short', timeStyle: 'medium' })

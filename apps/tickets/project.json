@@ -44,6 +44,14 @@
       "options": {
         "lintFilePatterns": ["apps/tickets/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/tickets"
+      }
     }
   },
   "tags": []

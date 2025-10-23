@@ -1,9 +1,9 @@
-<script setup>
-import { formatDateAndTime } from 'libs/shared/helpers/datetimeconverter.helper.ts';
-import { timeAgo } from 'libs/shared/helpers/timeago.helper.ts';
+<script setup lang="ts">
+import { formatDateAndTime } from '@shared/helpers/datetimeconverter.helper';
+import { timeAgo } from '@shared/helpers/timeago.helper';
 import { onBeforeMount, onUpdated, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { ticketsService, translationsService, usersService } from '../services';
+import { ticketsService, translationsService, usersService } from '@/services';
 
 const route = useRoute();
 const loggedInUser = ref();

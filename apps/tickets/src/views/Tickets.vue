@@ -1,10 +1,11 @@
-<script setup>
-import { formatDateAndTime } from 'libs/shared/helpers/datetimeconverter.helper.ts';
-import { timeAgo } from 'libs/shared/helpers/timeago.helper.ts';
-import { onBeforeMount, ref } from 'vue';
+<script setup lang="ts">
+import { formatDateAndTime } from '@shared/helpers/datetimeconverter.helper';
+import { timeAgo } from '@shared/helpers/timeago.helper';
+import { onBeforeMount, ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { userSettingsService } from '../../../../libs/shared/services';
-import { ticketsService, translationsService, usersService } from '../services';
+import { userSettingsService } from '@shared/services';
+import { ticketsService, translationsService, usersService } from '@/services';
+import type { TicketDetails } from '@/models/tickets.model';
 
 const router = useRouter();
 const tickets = ref();
@@ -145,27 +146,55 @@ onBeforeMount(async () => {
     paginator
     stripedRows
     removableSort
+    filterDisplay="row"
   >
     <template #empty><p style="text-align: center">Ingen opgaver fundet.</p></template>
-    <Column field="id" header="ID" sortable></Column>
-    <Column field="category" header="Kategori" sortable></Column>
-    <Column field="name" header="Navn" sortable></Column>
-    <Column field="priority" header="Prioritet" sortable>
+    <Column field="id" header="ID" sortable :showFilterMenu="false">
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText v-model="filterModel.value" @input="filterCallback()" placeholder="Søg ID" />
+      </template>
+    </Column>
+    <Column field="category" header="Kategori" sortable :showFilterMenu="false">
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText v-model="filterModel.value" @input="filterCallback()" placeholder="Søg kategori" />
+      </template>
+    </Column>
+    <Column field="name" header="Navn" sortable :showFilterMenu="false">
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText v-model="filterModel.value" @input="filterCallback()" placeholder="Søg navn" />
+      </template>
+    </Column>
+    <Column field="priority" header="Prioritet" sortable :showFilterMenu="false">
       <template #body="slotProps">
         {{ tr.tickets.priority[slotProps.data.priority].da }}
       </template>
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText v-model="filterModel.value" @input="filterCallback()" placeholder="Søg prioritet" />
+      </template>
     </Column>
-    <Column field="creator" header="Opretter" sortable></Column>
-    <Column field="assignee" header="Udfører" sortable></Column>
-    <Column field="status" header="Status" sortable></Column>
-    <Column field="last_edit" header="Ændret" sortable>
+    <Column field="creator" header="Opretter" sortable :showFilterMenu="false">
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText v-model="filterModel.value" @input="filterCallback()" placeholder="Søg opretter" />
+      </template>
+    </Column>
+    <Column field="assignee" header="Udfører" sortable :showFilterMenu="false">
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText v-model="filterModel.value" @input="filterCallback()" placeholder="Søg udfører" />
+      </template>
+    </Column>
+    <Column field="status" header="Status" sortable :showFilterMenu="false">
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText v-model="filterModel.value" @input="filterCallback()" placeholder="Søg status" />
+      </template>
+    </Column>
+    <Column field="last_edit" header="Ændret" sortable :showFilterMenu="false">
       <template #body="slotProps">
         <div v-tooltip.bottom="formatDateAndTime(slotProps.data.last_edit)">
           {{ timeAgo(slotProps.data.last_edit) }}
         </div>
       </template>
     </Column>
-    <Column field="created" header="Oprettet" sortable>
+    <Column field="created" header="Oprettet" sortable :showFilterMenu="false">
       <template #body="slotProps">
         <div v-tooltip.bottom="formatDateAndTime(slotProps.data.created)">{{ timeAgo(slotProps.data.created) }}</div>
       </template>

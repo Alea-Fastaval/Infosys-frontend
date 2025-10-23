@@ -24,5 +24,15 @@ export default defineConfig({
       }
     }
   },
-  plugins: [vue(), nxViteTsPaths()]
+  plugins: [vue(), nxViteTsPaths()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../coverage/apps/tickets',
+      provider: 'v8'
+    }
+  }
 });
