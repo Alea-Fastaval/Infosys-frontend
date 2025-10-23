@@ -1,0 +1,222 @@
+{
+  "version": "6.0",
+  "nxVersion": "22.0.1",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {
+      "tickets": [
+        {
+          "file": "apps/tickets/.eslintrc.json",
+          "hash": "8280455001438149774"
+        },
+        {
+          "file": "apps/tickets/index.html",
+          "hash": "1388726820799026237"
+        },
+        {
+          "file": "apps/tickets/project.json",
+          "hash": "10823739424555424400"
+        },
+        {
+          "file": "apps/tickets/public/mockServiceWorker.js",
+          "hash": "5971079384820301515"
+        },
+        {
+          "file": "apps/tickets/src/App.vue",
+          "hash": "6508490247694939363"
+        },
+        {
+          "file": "apps/tickets/src/main.ts",
+          "hash": "11355578357544864892",
+          "deps": [
+            "npm:javascript-time-ago",
+            "npm:primevue",
+            "npm:vue"
+          ]
+        },
+        {
+          "file": "apps/tickets/src/mocks/index.js",
+          "hash": "3979529245887720968",
+          "deps": [
+            "npm:msw"
+          ]
+        },
+        {
+          "file": "apps/tickets/src/mocks/resolvers/messages.js",
+          "hash": "16775709319521329961",
+          "deps": [
+            "npm:msw"
+          ]
+        },
+        {
+          "file": "apps/tickets/src/mocks/resolvers/tickets.js",
+          "hash": "2593116646212884338",
+          "deps": [
+            "npm:msw"
+          ]
+        },
+        {
+          "file": "apps/tickets/src/mocks/resolvers/translations.js",
+          "hash": "13697746886825508452",
+          "deps": [
+            "npm:msw"
+          ]
+        },
+        {
+          "file": "apps/tickets/src/mocks/resolvers/users.js",
+          "hash": "11569022176862947276",
+          "deps": [
+            "npm:msw"
+          ]
+        },
+        {
+          "file": "apps/tickets/src/models/tickets.model.ts",
+          "hash": "3578066518150686735"
+        },
+        {
+          "file": "apps/tickets/src/router.ts",
+          "hash": "10042858432198277052",
+          "deps": [
+            "npm:vue-router"
+          ]
+        },
+        {
+          "file": "apps/tickets/src/services/api.service.js",
+          "hash": "3148607530013808289"
+        },
+        {
+          "file": "apps/tickets/src/services/index.js",
+          "hash": "8431404113550543519"
+        },
+        {
+          "file": "apps/tickets/src/services/tickets.service.ts",
+          "hash": "18354155435377891692"
+        },
+        {
+          "file": "apps/tickets/src/services/translations.service.ts",
+          "hash": "4209612753609002658"
+        },
+        {
+          "file": "apps/tickets/src/services/users.service.ts",
+          "hash": "9105678670995544301"
+        },
+        {
+          "file": "apps/tickets/src/styles.scss",
+          "hash": "2565621471413420568"
+        },
+        {
+          "file": "apps/tickets/src/views/Ticket.vue",
+          "hash": "6995408889506432590"
+        },
+        {
+          "file": "apps/tickets/src/views/Tickets.vue",
+          "hash": "13254341121431327053"
+        },
+        {
+          "file": "apps/tickets/src/views/index.js",
+          "hash": "6828358145174704351"
+        },
+        {
+          "file": "apps/tickets/src/vue-shims.d.ts",
+          "hash": "1350740973621485859",
+          "deps": [
+            "npm:vue"
+          ]
+        },
+        {
+          "file": "apps/tickets/tsconfig.app.json",
+          "hash": "9449501279591359971"
+        },
+        {
+          "file": "apps/tickets/tsconfig.json",
+          "hash": "5764457849968022946"
+        },
+        {
+          "file": "apps/tickets/vite.config.ts",
+          "hash": "17032892432449512156",
+          "deps": [
+            "npm:@nx/vite",
+            "npm:@vitejs/plugin-vue",
+            "npm:vite"
+          ]
+        }
+      ]
+    },
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "10918129968808312611"
+      },
+      {
+        "file": ".eslintignore",
+        "hash": "7663861978715868291"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "5635359572088142794"
+      },
+      {
+        "file": ".github/workflows/build.yml",
+        "hash": "2487952424177385221"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "16877376182141465221"
+      },
+      {
+        "file": ".prettierignore",
+        "hash": "16448050467312557263"
+      },
+      {
+        "file": ".prettierrc",
+        "hash": "9850028878158392101"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "16884713733442577066"
+      },
+      {
+        "file": "README.md",
+        "hash": "4032757136303143138"
+      },
+      {
+        "file": "libs/shared/helpers/datetimeconverter.helper.ts",
+        "hash": "7777757538603131446"
+      },
+      {
+        "file": "libs/shared/helpers/timeago.helper.ts",
+        "hash": "4348106559669638243"
+      },
+      {
+        "file": "libs/shared/services/index.js",
+        "hash": "11205649053659700497"
+      },
+      {
+        "file": "libs/shared/services/usersettings.service.ts",
+        "hash": "7581526168079961685"
+      },
+      {
+        "file": "nx.json",
+        "hash": "7069088919734897722"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "3770574422550609662"
+      },
+      {
+        "file": "package.json",
+        "hash": "17347337833672862592"
+      },
+      {
+        "file": "tools/tsconfig.tools.json",
+        "hash": "16088922570277978783"
+      },
+      {
+        "file": "tsconfig.base.json",
+        "hash": "10376580982432617258"
+      }
+    ]
+  },
+  "externalNodesHash": "11255016682152464703"
+}
