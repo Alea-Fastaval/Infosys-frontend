@@ -2,6 +2,7 @@
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/tickets',
@@ -14,6 +15,14 @@ export default defineConfig({
   preview: {
     port: 4300,
     host: 'localhost'
+  },
+  resolve: {
+    alias: {
+      '@/services': path.resolve(__dirname, './src/services'),
+      '@/models': path.resolve(__dirname, './src/models'),
+      '@/views': path.resolve(__dirname, './src/views'),
+      '@shared': path.resolve(__dirname, '../../libs/shared')
+    }
   },
   build: {
     rollupOptions: {
