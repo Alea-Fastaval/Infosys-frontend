@@ -4,6 +4,7 @@ import { timeAgo } from '@shared/helpers/timeago.helper';
 import { onBeforeMount, onUpdated, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { ticketsService, translationsService, usersService } from '@/services';
+import type { MessageDetails } from '@/models/tickets.model';
 
 const route = useRoute();
 const loggedInUser = ref();
@@ -83,8 +84,8 @@ const openTicketModal = () => {
   statusSelected.value = statusOptions[ticket.value.open].options[ticket.value.status];
 };
 
-const openMessageModal = (message) => {
-  messageEdited.value = { ...message, ticket: ticket.value.id };
+const openMessageModal = (message?: MessageDetails) => {
+  messageEdited.value = message ? { ...message, ticket: ticket.value.id } : { ticket: ticket.value.id };
   editMessageDialogType.value = !message ? 'new' : 'edit';
   editMessageDialogOpen.value = true;
 };
@@ -92,7 +93,10 @@ const openMessageModal = (message) => {
 const getTicketInfo = async () =>
   await ticketsService
     .getTicket(route.params.id)
-    .then((response) => (ticket.value = response.tickets[route.params.id]));
+    .then((response) => {
+      const ticketId = typeof route.params.id === 'string' ? route.params.id : route.params.id[0];
+      ticket.value = response.tickets[ticketId];
+    });
 
 const getTicketMessages = async () =>
   await ticketsService.fetchTicketMessages(ticket.value.id).then((response) => (messages.value = response.messages));

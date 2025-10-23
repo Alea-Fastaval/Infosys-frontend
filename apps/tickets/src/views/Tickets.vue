@@ -27,13 +27,18 @@ const ticketAssignee = ref('');
 const getTickets = async () => {
   await ticketsService.fetchTickets().then((response) => {
     tickets.value = Object.values(response.tickets).map((ticket) => {
-      ticket.category = tr.value.tickets.category[ticket.category].da;
-      ticket.creator = users.value.find((user) => user.id === ticket.creator).name;
-      ticket.assignee = users.value.find((user) => user.id === ticket.assignee).name;
+      const categoryIndex = typeof ticket.category === 'number' ? ticket.category : 0;
+      const creatorId = typeof ticket.creator === 'number' ? ticket.creator : 0;
+      const assigneeId = typeof ticket.assignee === 'number' ? ticket.assignee : 0;
+      const statusIndex = typeof ticket.status === 'number' ? ticket.status : 0;
+      
+      ticket.category = tr.value.tickets.category[categoryIndex].da;
+      ticket.creator = users.value.find((user) => user.id === creatorId)?.name || '';
+      ticket.assignee = users.value.find((user) => user.id === assigneeId)?.name || '';
       ticket.status =
         ticket.open === 1
-          ? tr.value.tickets.status.open[ticket.status].da
-          : tr.value.tickets.status.closed[ticket.status].da;
+          ? tr.value.tickets.status.open[statusIndex].da
+          : tr.value.tickets.status.closed[statusIndex].da;
       return ticket;
     });
     filterTickets();

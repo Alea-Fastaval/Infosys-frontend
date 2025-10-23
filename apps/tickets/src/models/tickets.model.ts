@@ -1,6 +1,6 @@
 export interface TicketResponse {
   status: 'success' | 'error';
-  tickets: TicketDetails[];
+  tickets: { [key: string]: TicketDetails };
 }
 
 export interface TicketMessagesResponse {
@@ -10,23 +10,23 @@ export interface TicketMessagesResponse {
 
 export interface TicketDetails {
   assignee: number;
-  category: number;
+  category: number | string;
   created: number;
-  creator: number;
+  creator: number | string;
   description: string;
   id: number;
   last_edit: number;
   name: string;
   open: number;
   priority: number;
-  status?: number;
+  status?: number | string;
 }
 
 export interface MessageDetails {
-  id: number;
-  last_edit: number;
-  message: string;
-  posted: number;
-  ticket: number;
-  user: number;
+  id?: number;
+  last_edit?: number;
+  message?: string;
+  posted?: number;
+  ticket?: number;
+  user?: number;
 }
