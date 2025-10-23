@@ -27,10 +27,51 @@ const ticketAssignee = ref('');
 const getTickets = async () => {
   await ticketsService.fetchTickets().then((response) => {
     tickets.value = Object.values(response.tickets).map((ticket) => {
-      const categoryIndex = typeof ticket.category === 'number' ? ticket.category : 0;
-      const creatorId = typeof ticket.creator === 'number' ? ticket.creator : 0;
-      const assigneeId = typeof ticket.assignee === 'number' ? ticket.assignee : 0;
-      const statusIndex = typeof ticket.status === 'number' ? ticket.status : 0;
+      let categoryIndex, creatorId, assigneeId, statusIndex;
+      
+      if (typeof ticket.category === 'number') {
+        categoryIndex = ticket.category;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.category (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.category,
+          'Falling back to 0.'
+        );
+        categoryIndex = 0;
+      }
+      
+      if (typeof ticket.creator === 'number') {
+        creatorId = ticket.creator;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.creator (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.creator,
+          'Falling back to 0.'
+        );
+        creatorId = 0;
+      }
+      
+      if (typeof ticket.assignee === 'number') {
+        assigneeId = ticket.assignee;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.assignee (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.assignee,
+          'Falling back to 0.'
+        );
+        assigneeId = 0;
+      }
+      
+      if (typeof ticket.status === 'number') {
+        statusIndex = ticket.status;
+      } else {
+        console.warn(
+          `[Tickets] Unexpected type for ticket.status (ticket id: ${ticket.id ?? 'unknown'}):`,
+          ticket.status,
+          'Falling back to 0.'
+        );
+        statusIndex = 0;
+      }
       
       ticket.category = tr.value.tickets.category[categoryIndex].da;
       ticket.creator = users.value.find((user) => user.id === creatorId)?.name || '';

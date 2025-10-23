@@ -94,8 +94,13 @@ const getTicketInfo = async () =>
   await ticketsService
     .getTicket(route.params.id)
     .then((response) => {
-      const ticketId = typeof route.params.id === 'string' ? route.params.id : route.params.id[0];
-      ticket.value = response.tickets[ticketId];
+      const ticketId = typeof route.params.id === 'string' ? route.params.id : (route.params.id?.[0] ?? '');
+      if (ticketId) {
+        ticket.value = response.tickets[ticketId];
+      } else {
+        console.error('[Ticket] No valid ticket ID found in route params');
+        ticket.value = null;
+      }
     });
 
 const getTicketMessages = async () =>
